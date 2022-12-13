@@ -106,7 +106,7 @@ h1 + .post-meta {
         &:hover {
           text-decoration: none;
 
-          >i {
+          > i {
             @extend %btn-share-hovor;
           }
         }
@@ -136,7 +136,7 @@ h1 + .post-meta {
     } /* .share-icons */
 
     .fas.fa-link {
-      @include btn-sharing-color(rgb(171, 171, 171));
+      @include btn-sharing-color(blanchedalmond);
     }
   } /* .share-wrapper */
 }
@@ -315,7 +315,8 @@ nav[data-toggle="toc"] {
     margin-bottom: 2rem;
   }
 
-  #disqus_thread { /* stylelint-disable-line selector-id-pattern */
+  #disqus_thread {
+    /* stylelint-disable-line selector-id-pattern */
     min-height: 8.5rem;
   }
 }
