@@ -136,7 +136,7 @@ h1 + .post-meta {
     } /* .share-icons */
 
     .fas.fa-link {
-      @include btn-sharing-color(blanchedalmond);
+      @include btn-sharing-color(rgb(171, 171, 171));
     }
   } /* .share-wrapper */
 }
