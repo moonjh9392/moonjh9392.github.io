@@ -20,7 +20,7 @@ timezone: Asia/Seoul
 
 title: Moon # the main title
 
-tagline: 기억보다 기록하자 # it will display as the sub-title
+tagline: 아무것도 하지않으면 아무일도 일어나지 않는다. # it will display as the sub-title
 
 description: >- # used by seo meta and the atom feed
   A minimal, responsive, and powerful Jekyll theme for presenting professional writing.
