@@ -23,7 +23,7 @@ title: Moon # the main title
 tagline: 아무것도 하지않으면 아무일도 일어나지 않는다. # it will display as the sub-title
 
 description: >- # used by seo meta and the atom feed
-  작고 소중한 프론트엔드 개발자의 일기
+  할까? 말까? 할때는 하자!
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
 url: "https://moonjh9392.github.io"
