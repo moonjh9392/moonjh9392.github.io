@@ -9,7 +9,7 @@ tags: [devlog, react-confirm-alert, react] # TAG는 반드시 소문자로 이�
 
 1. 공용으로 쓰기위해 confirm 컴포넌트의 위치를 common에 만들어준다
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/9755c0d1-32be-4405-b950-1bd54693c5f9/Untitled.png)
+![Untitled (3)](https://user-images.githubusercontent.com/45509511/207517177-96094bcf-f6b8-444e-9ce3-045b38643a1e.png)
 
 1. confirm의 내용
 
@@ -78,4 +78,4 @@ const handleDeleteClick = () => {
 
 1. 결과
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/200015d7-cef0-442a-9d26-4abffb67b69c/Untitled.png)
+<img width="827" alt="Untitled (4)" src="https://user-images.githubusercontent.com/45509511/207517223-86406c20-826a-45d0-ac1b-bb3f86f2e054.png">
