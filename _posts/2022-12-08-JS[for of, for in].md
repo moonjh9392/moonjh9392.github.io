@@ -1,7 +1,7 @@
 ---
 title: "JS[for of, for in]"
 date: "2022-12-08 00:00:00"
-categories: [JS, Study]
+categories: [FE, JS]
 tags: [JS, javaSciprt] # TAG는 반드시 소문자로 이루어져야함!
 ---
 
