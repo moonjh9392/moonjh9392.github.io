@@ -34,7 +34,7 @@ github:
 # twitter:
 #   username: twitter_username # change to your twitter username
 linkedin:
-  username: j-moon-26b09222a
+  username: %EC%A7%80%ED%9B%88-%EB%AC%B8-26b09222a
 
 social:
   # Change to your full name.
@@ -47,7 +47,7 @@ social:
     - https://github.com/moonjh9392 # change to your github homepage
     # Uncomment below to add more social links
     # - https://www.facebook.com/username
-    - https://www.linkedin.com/in/j-moon-26b09222a/
+    - https://www.linkedin.com/in/%EC%A7%80%ED%9B%88-%EB%AC%B8-26b09222a/
 
 google_site_verification: # fill in to your verification string
 
