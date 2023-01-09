@@ -5,134 +5,39 @@ categories: [FE, React]
 tags: [custom, react] # TAG는 반드시 소문자로 이루어져야함!
 ---
 
-## 📌 useMemo
+## 📌 customHook
 
 참고 주소
 
-<a href='https://react.vlpt.us/basic/17-useMemo.html'>https://react.vlpt.us/basic/17-useMemo.html</a>
+<a href='https://react.vlpt.us/basic/21-custom-hook.html'>https://react.vlpt.us/basic/21-custom-hook.html</a>
 
-### ✏️ 연산값 재사용
+### ✏️ 커스텀 훅
 
-useMemo는 성능 최적화를 위하여 연산된 값 재사용하는 hook 이다.
+컴포넌트를 만들다보면, 반복되는 로직이 자주 발생기때문에 이러한 로직들을 공통으로 사용 할 수 있게 hook으로 만들어준다.
 
-예시
+커스텀 Hooks 를 만들 때에는 보통 이렇게 use 라는 키워드로 시작하는 파일을 만들고 그 안에 함수를 작성함
 
-유저 이름을 클릭하면 active 값을 true 로 바꿔 글자색을 변화시키는 펑션을 만들어 본다.
+커스텀 Hooks 를 만드는 방법은 그 안에서 useState, useEffect, useReducer, useCallback 등 Hooks 를 사용하여 원하는 기능을 구현해주고, 컴포넌트에서 사용하고 싶은 값들을 반환해주면 된다~
+
+예를 들어 input을 관리하는 훅을 만들면
 
 ```javascript
-import React, { useMemo, useRef, useState } from "react";
-import UserList from "./UserList";
-import CreateUser from "./CreateUser";
+import { useState, useCallback } from "react";
 
-function countActiveUsers(users) {
-  console.log("활성 사용자 수를 세는중...");
-  return users.filter((user) => user.active).length;
-}
-
-function UseMemo() {
-  const [inputs, setInputs] = useState({
-    username: "",
-    email: "",
-  });
-  const { username, email } = inputs;
-  const onChange = (e) => {
+function useInputs(initialForm) {
+  const [form, setForm] = useState(initialForm);
+  // change
+  const onChange = useCallback((e) => {
     const { name, value } = e.target;
-    setInputs({
-      ...inputs,
-      [name]: value,
-    });
-  };
-  const [users, setUsers] = useState([
-    {
-      id: 1,
-      username: "velopert",
-      email: "public.velopert@gmail.com",
-      active: true,
-    },
-    {
-      id: 2,
-      username: "tester",
-      email: "tester@example.com",
-      active: false,
-    },
-    {
-      id: 3,
-      username: "liz",
-      email: "liz@example.com",
-      active: false,
-    },
-  ]);
-
-  const nextId = useRef(4);
-  const onCreate = () => {
-    const user = {
-      id: nextId.current,
-      username,
-      email,
-    };
-    setUsers(users.concat(user));
-
-    setInputs({
-      username: "",
-      email: "",
-    });
-    nextId.current += 1;
-  };
-
-  const onRemove = (id) => {
-    // user.id 가 파라미터로 일치하지 않는 원소만 추출해서 새로운 배열을 만듬
-    // = user.id 가 id 인 것을 제거함
-    setUsers(users.filter((user) => user.id !== id));
-  };
-  const onToggle = (id) => {
-    setUsers(
-      users.map((user) =>
-        user.id === id ? { ...user, active: !user.active } : user
-      )
-    );
-  };
-  const count = countActiveUsers(users);
-  return (
-    <>
-      <CreateUser
-        username={username}
-        email={email}
-        onChange={onChange}
-        onCreate={onCreate}
-      />
-      <UserList users={users} onRemove={onRemove} onToggle={onToggle} />
-      <div>활성사용자 수 : {count}</div>
-    </>
-  );
+    setForm((form) => ({ ...form, [name]: value }));
+  }, []);
+  const reset = useCallback(() => setForm(initialForm), [initialForm]);
+  return [form, onChange, reset];
 }
 
-export default UseMemo;
+export default useInputs;
 ```
 
-```javascript
-const count = countActiveUsers(users);
-```
+이렇게 만들어주고 들고가서 쓰면된다.
 
-![ezgif com-gif-maker (4)](https://user-images.githubusercontent.com/45509511/209783808-a787df1d-f389-4578-9988-6268c7c74367.gif)
-
-이부분인데 count 값이 변하지 않아도 input에 onChange 메서드만 발동되도 계속 호출된다.
-
-값이 변하지 않을때 호출하지 않게 바꿔주는게 useMemo 이다.
-
-```javascript
-const count = useMemo(() => countActiveUsers(users), [users]);
-```
-
-![ezgif com-gif-maker (5)](https://user-images.githubusercontent.com/45509511/209783864-1ad8efe4-5e04-4eca-bffc-b91a589b207d.gif)
-
-바꿔주면 count 값이 변할때만 호출하게됨 count를 state로 만들면 해결되지만 그렇게 하지않는 경우도 있기에
-
-useMemo가 사용됨
-
-useMemo 의 첫번째 인자에는 연산할 함수 두번째 인자 deps 배열
-
-이 배열 안에 넣은 내용이 바뀌면, 우리가 등록한 함수를 호출해서 값을 연산해주고, 만약에 내용이 바뀌지 않았다면 이전에 연산한 값을 재사용
-
-예시 주소
-
-<a href='https://github.com/moonjh9392/hooks'>https://github.com/moonjh9392/hooks</a>
+주의 할점은 customHook도 Hook이기 때문에 컴포넌트의 최상위 스코프에서만 사용이 가능하다. useState, useEffect, useReducer, useCallback 처럼
