@@ -95,4 +95,6 @@ function App() {
 export default App;
 ```
 
-node로 테스트 해보려고했지만 node에서는 stomp 사용안됨
+node로는 테스트 해봤지만 spring에서 작동되는지 확인 하지 못함.
+
+테스트 보류중
