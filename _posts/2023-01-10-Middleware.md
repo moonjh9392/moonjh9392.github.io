@@ -1,5 +1,5 @@
 ---
-title: "미들웨어와 비동기"
+title: "middleware"
 date: "2023-01-10 00:00:00"
 categories: [FE, React]
 tags: [react, middleware, redux] # TAG는 반드시 소문자로 이루어져야함!
