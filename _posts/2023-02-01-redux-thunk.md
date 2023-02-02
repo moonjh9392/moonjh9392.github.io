@@ -31,3 +31,18 @@ const getComments = () => (dispatch, getState) => {
     .catch((e) => dispatch({ type: "GET_COMMENTS_ERROR", error: e })); // 실패시
 };
 ```
+
+async/await를 사용
+
+```javascript
+const getComments = () => async (dispatch, getState) => {
+  const id = getState().post.activeId;
+  dispatch({ type: "GET_COMMENTS" });
+  try {
+    const comments = await api.getComments(id);
+    dispatch({ type: "GET_COMMENTS_SUCCESS", id, comments });
+  } catch (e) {
+    dispatch({ type: "GET_COMMENTS_ERROR", error: e });
+  }
+};
+```
