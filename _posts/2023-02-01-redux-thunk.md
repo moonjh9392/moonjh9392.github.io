@@ -1,5 +1,5 @@
 ---
-title: "Footer 하단고정"
+title: "redux-thunk"
 date: "2023-02-01 00:00:00"
 categories: [FE, React]
 tags: [redux] # TAG는 반드시 소문자로 이루어져야함!
