@@ -67,3 +67,126 @@ export default function RootLayout({
 - return 값은 api의 성공, 실패여부, api return 값을 포함한 객체입니다.
 - useQuery는 비동기로 작동합니다. 즉, 한 컴포넌트에 여러개의 useQuery가 있다면 하나가 끝나고 다음 useQuery가 실행되는 것이 아닌 두개의 useQuery가 동시에 실행됩니다. 여러개의 비동기 query가 있다면 useQuery보다는 밑에 설명해 드릴 useQueries를 권유드립니다.
 - enabled를 사용하면 useQuery를 동기적으로 사용 가능합니다. 아래 예시로 추가 설명하겠습니다.
+
+#### status
+
+```javascript
+function Todos() {
+  const { status, data, error } = useQuery("todos", fetchTodoList);
+
+  if (status === "loading") {
+    return <span>Loading...</span>;
+  }
+
+  if (status === "error") {
+    return <span>Error: {error.message}</span>;
+  }
+
+  return (
+    <ul>
+      {data.map((todo) => (
+        <li key={todo.id}>{todo.title}</li>
+      ))}
+    </ul>
+  );
+}
+```
+
+status로 loading, error 한번에 처리가능
+
+### useQuery 동기적으로 실행
+
+```javascript
+const { data: todoList, error, isFetching } = useQuery("todos", fetchTodoList);
+const {
+  data: nextTodo,
+  error,
+  isFetching,
+} = useQuery("nextTodos", fetchNextTodoList, {
+  enabled: !!todoList, // true가 되면 fetchNextTodoList를 실행한다
+});
+```
+
+### useQueries
+
+```javascript
+const usersQuery = useQuery("users", fetchUsers);
+const teamsQuery = useQuery("teams", fetchTeams);
+const projectsQuery = useQuery("projects", fetchProjects);
+
+//위의 코드를
+
+//아래 처럼 변경 가능
+const result = useQueries([
+  {
+    queryKey: ["getRune", riot.version],
+    queryFn: () => api.getRunInfo(riot.version),
+  },
+  {
+    queryKey: ["getSpell", riot.version],
+    queryFn: () => api.getSpellInfo(riot.version),
+  },
+]);
+
+useEffect(() => {
+  console.log(result); // [{rune 정보, data: [], isSucces: true ...}, {spell 정보, data: [], isSucces: true ...}]
+  const loadingFinishAll = result.some((result) => result.isLoading);
+  console.log(loadingFinishAll); // loadingFinishAll이 false이면 최종 완료
+}, [result]);
+```
+
+### useMutation
+
+- 값을 바꿀때 사용하는 api. return 값은 useQuery와 동일
+
+```javascript
+const riot = {
+  version: "12.1.1",
+};
+
+const result = useQueries([
+  {
+    queryKey: ["getRune", riot.version],
+    queryFn: (params) => {
+      console.log(params); // {queryKey: ['getRune', '12.1.1'], pageParam: undefined, meta: undefined}
+
+      return api.getRunInfo(riot.version);
+    },
+  },
+  {
+    queryKey: ["getSpell", riot.version],
+    queryFn: () => api.getSpellInfo(riot.version),
+  },
+]);
+```
+
+### update후에 get 다시 실행
+
+```javascript
+const mutation = useMutation(postTodo, {
+  onSuccess: () => {
+    // postTodo가 성공하면 todos로 맵핑된 useQuery api 함수를 실행합니다.
+    queryClient.invalidateQueries("todos");
+  },
+});
+```
+
+- mutation에서 return된 값을 이용해서 get 함수의 파라미터를 변경해야할 경우 setQueryData를 사용
+
+```javascript
+const queryClient = useQueryClient();
+
+const mutation = useMutation(editTodo, {
+  onSuccess: (data) => {
+    // data가 fetchTodoById로 들어간다
+    queryClient.setQueryData(["todo", { id: 5 }], data);
+  },
+});
+
+const { status, data, error } = useQuery(["todo", { id: 5 }], fetchTodoById);
+
+mutation.mutate({
+  id: 5,
+  name: "nkh",
+});
+```
