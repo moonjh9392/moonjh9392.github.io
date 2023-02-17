@@ -1,7 +1,7 @@
 ---
 title: "react-query"
 date: "2023-02-15 00:00:00"
-categories: [FE, REACT]
+categories: [FE, React]
 tags: [react, query] # TAG는 반드시 소문자로 이루어져야함!
 ---
 
