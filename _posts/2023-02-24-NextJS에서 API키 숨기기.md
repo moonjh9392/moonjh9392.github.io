@@ -9,7 +9,8 @@ tags: [next] # TAG는 반드시 소문자로 이루어져야함!
 
 ### api 키 보는법
 
-(사진)
+![스크린샷 2023-02-24 오후 5 18 03](https://user-images.githubusercontent.com/45509511/221131955-637247b8-1d4d-4151-8520-b5e39f04d9c7.png)
+
 
 ### next의 redirects 와 rewrites 활용
 
@@ -44,3 +45,8 @@ module.exports = nextConfig;
 ```
 
 ### rewrites를 이용하여 api_key 숨긴 결과
+
+![스크린샷 2023-02-24 오후 5 37 04](https://user-images.githubusercontent.com/45509511/221131990-6ba29fe5-c2b1-4c06-b1e4-abf0775e3a93.png)
+
+![스크린샷 2023-02-24 오후 5 37 46](https://user-images.githubusercontent.com/45509511/221132029-78c5978c-818c-484f-b6f6-10e08e8fa252.png)
+
