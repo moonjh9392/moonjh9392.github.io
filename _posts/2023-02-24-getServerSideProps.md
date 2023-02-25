@@ -23,7 +23,8 @@ loading없이 API가 완료되도록 기다린 후에 모든 정보를 보여줄
 
 getServerSideProps를 이용하여
 
-![스크린샷 2023-02-25 오후 10 58 08](https://user-images.githubusercontent.com/45509511/221361081-4517075b-4b90-47ff-a345-43eefc93e97f.png)
+![스크린샷 2023-02-25 오후 11 08 05](https://user-images.githubusercontent.com/45509511/221361380-794f7975-b5f8-4cac-abbd-55fbb5162027.png)
+
 
 보여주면된다. 주의할점 getServerSideProps에서 fetch를 사용할때는 http://localhost가 붙는다는 점
 
