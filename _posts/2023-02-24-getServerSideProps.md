@@ -30,7 +30,7 @@ getServerSideProps를 이용하여
 
 loading을 보여주는게 나은것 같지만 getServerSideProps를 쓸일이 있을것 같아 보인다.
 
-getServerSideProps가 작동하는 흐름은
+getServerSideProps가 작동하는 흐름은 아래와 같음
 
 ![스크린샷 2023-02-25 오후 10 59 47](https://user-images.githubusercontent.com/45509511/221361089-c869fd30-1a1c-4777-865b-46f961539716.png)
 
